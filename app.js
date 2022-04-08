@@ -2,7 +2,12 @@ const itemInput = document.getElementById('item-input');
 const btnAdd = document.getElementById('btn-add');
 const ulCart = document.getElementById('cart');
 
-let list = [];
+let list = [
+  { id: 0, name: 'batata', status: false },
+  { id: 1, name: 'arroz', status: false },
+  { id: 2, name: 'feijao', status: false },
+];
+
 
 function createCheckbox(status, listener) {
   const checkbox = document.createElement('input');
@@ -62,10 +67,20 @@ function addItem() {
 
   if (!name) return;
 
+  let maior = 0;
+  list.forEach(item => {
+    if (item.id > maior) {
+      maior = item.id;
+    }
+  });
+
   list.push({
+    id: maior + 1,
     name: name,
     status: false
-  })
+  });
+
+  console.log(list);
 
   itemInput.value = '';
   updateScreen();
